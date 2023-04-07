@@ -1,8 +1,51 @@
 name: CI for Java Invoice
 on: [push]
 jobs:
-  test:
-    name: Unit tests
+  checkstyle:
+    name: Lint with Checkstyle
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '15'
+          distribution: 'adopt'
+      - name: Checkstyle
+        run: mvn checkstyle:check
+
+  test_jdk_8:
+    name: Unit tests on JDK8
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+      - name: Checkstyle
+        run: mvn checkstyle:check
+      - name: Test
+        run: mvn test
+
+  test_jdk_13:
+    name: Unit tests on JDK8
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '13'
+          distribution: 'adopt'
+      - name: Checkstyle
+        run: mvn checkstyle:check
+      - name: Test
+        run: mvn test
+
+  test_jdk_15:
+    name: Unit tests on JDK8
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
