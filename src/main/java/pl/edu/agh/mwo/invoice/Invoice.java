@@ -2,6 +2,7 @@ package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import pl.edu.agh.mwo.invoice.product.Product;
@@ -9,7 +10,7 @@ import pl.edu.agh.mwo.invoice.product.Product;
 public class Invoice {
 
     private int id;
-    private Map<Product, Integer> products = new HashMap<Product, Integer>();
+    private Map<Product, Integer> products = new LinkedHashMap<>();
 
     protected Invoice(int id) {
         this.id = id;

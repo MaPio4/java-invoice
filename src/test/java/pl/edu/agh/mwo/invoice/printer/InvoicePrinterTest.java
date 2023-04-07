@@ -34,8 +34,8 @@ public class InvoicePrinterTest {
         String message = invoicePrinter.getPrintMessage();
 
         for (String substring : expectedSubstrings) {
-            if(!message.contains(substring)) {
-                Assert.fail("Invoice hasn't got the expected substring: '"+substring + "'\n"+message);
+            if (!message.contains(substring)) {
+                Assert.fail("Invoice hasn't got the expected substring: '" + substring + "'\n" + message);
             }
         }
     }
@@ -61,20 +61,19 @@ public class InvoicePrinterTest {
         String message = invoicePrinter.getPrintMessage();
 
         for (String substring : expectedSubstrings) {
-            if(!message.contains(substring)) {
-                Assert.fail("Invoice hasn't got the expected substring: '"+substring + "'\n"+message);
+            if (!message.contains(substring)) {
+                Assert.fail("Invoice hasn't got the expected substring: '" + substring + "'\n" + message);
             }
         }
     }
 
     @Test
     public void testInvoicePrintOfTheSecondInvoiceWithMultipleProducts() {
-        String[] expectedSubstrings = {
-                "Faktura #2",
-                "-> Wino\t|3\t|36.90",
-                "-> Maslanka\t|1\t|108.00",
-                "-> Owoce\t|2\t|400",
-                "Liczba pozycji: 3"};
+        String expectedSubstring = "Faktura #2\n" +
+                "-> Owoce\t|2\t|400\n" +
+                "-> Maslanka\t|1\t|108.00\n" +
+                "-> Wino\t|3\t|36.90\n" +
+                "Liczba pozycji: 3";
 
         InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
         Invoice firstInvoice = invoiceGenerator.generateNewInvoice();
@@ -89,10 +88,7 @@ public class InvoicePrinterTest {
         invoice.addProduct(new OtherProduct("Wino", new BigDecimal("10")));
         String message = invoicePrinter.getPrintMessage();
 
-        for (String substring : expectedSubstrings) {
-            if(!message.contains(substring)) {
-                Assert.fail("Invoice hasn't got the expected substring: '"+substring + "'\n"+message);
-            }
-        }
+        Assert.assertEquals(expectedSubstring, message);
+
     }
 }
