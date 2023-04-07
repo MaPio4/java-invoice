@@ -2,7 +2,7 @@ name: CI for Java Invoice
 on: [push]
 jobs:
   test:
-    name: Unit tests
+    name: Unit tests and checkstyle
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
