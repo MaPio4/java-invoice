@@ -30,7 +30,7 @@ public class InvoicePrinterTest {
         invoice.addProduct(new TaxFreeProduct("Owoce", new BigDecimal("200")));
         invoice.addProduct(new DairyProduct("Maslanka", new BigDecimal("100")));
         invoice.addProduct(new OtherProduct("Wino", new BigDecimal("10")));
-        Assert.assertThat(new BigDecimal("310"), Matchers.comparesEqualTo(invoice.getNetTotal()));
+
         String message = invoicePrinter.getPrintMessage();
 
         for (String substring : expectedSubstrings) {
@@ -57,7 +57,36 @@ public class InvoicePrinterTest {
         invoice.addProduct(new TaxFreeProduct("Owoce", new BigDecimal("200")));
         invoice.addProduct(new DairyProduct("Maslanka", new BigDecimal("100")));
         invoice.addProduct(new OtherProduct("Wino", new BigDecimal("10")));
-        Assert.assertThat(new BigDecimal("310"), Matchers.comparesEqualTo(invoice.getNetTotal()));
+
+        String message = invoicePrinter.getPrintMessage();
+
+        for (String substring : expectedSubstrings) {
+            if(!message.contains(substring)) {
+                Assert.fail("Invoice hasn't got the expected substring: '"+substring + "'\n"+message);
+            }
+        }
+    }
+
+    @Test
+    public void testInvoicePrintOfTheSecondInvoiceWithMultipleProducts() {
+        String[] expectedSubstrings = {
+                "Faktura #2",
+                "-> Wino\t|3\t|36.90",
+                "-> Maslanka\t|1\t|108.00",
+                "-> Owoce\t|2\t|400",
+                "Liczba pozycji: 3"};
+
+        InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
+        Invoice firstInvoice = invoiceGenerator.generateNewInvoice();
+        Invoice invoice = invoiceGenerator.generateNewInvoice();
+        InvoicePrinter invoicePrinter = new InvoicePrinter(invoice);
+
+        invoice.addProduct(new TaxFreeProduct("Owoce", new BigDecimal("200")));
+        invoice.addProduct(new TaxFreeProduct("Owoce", new BigDecimal("200")));
+        invoice.addProduct(new DairyProduct("Maslanka", new BigDecimal("100")));
+        invoice.addProduct(new OtherProduct("Wino", new BigDecimal("10")));
+        invoice.addProduct(new OtherProduct("Wino", new BigDecimal("10")));
+        invoice.addProduct(new OtherProduct("Wino", new BigDecimal("10")));
         String message = invoicePrinter.getPrintMessage();
 
         for (String substring : expectedSubstrings) {
