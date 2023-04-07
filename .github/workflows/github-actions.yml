@@ -3,6 +3,7 @@ on: [push]
 jobs:
   checkstyle:
     name: Checkstyle
+    runs-on: ubuntu-latest
     steps:
       - name: Checkstyle:check
         run: mvn checkstyle:check
