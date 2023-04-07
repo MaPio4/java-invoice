@@ -30,7 +30,7 @@ jobs:
         run: mvn test
 
   test_jdk_13:
-    name: Unit tests on JDK8
+    name: Unit tests on JDK13
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -45,7 +45,7 @@ jobs:
         run: mvn test
 
   test_jdk_15:
-    name: Unit tests on JDK8
+    name: Unit tests on JDK15
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
