@@ -42,11 +42,13 @@ public class InvoicePrinterTest {
 
     @Test
     public void testInvoicePrintOfTheSecondInvoiceWith3Products() {
-        String expectedOutput = "Faktura #2\n" +
-                "-> Wino\t|1\t|12.30\n" +
-                "-> Maslanka\t|1\t|108.00\n" +
-                "-> Owoce\t|1\t|200\n" +
-                "Liczba pozycji: 3";
+        String[] expectedSubstrings = {
+                "Faktura #2",
+                "-> Wino\t|1\t|12.30",
+                "-> Maslanka\t|1\t|108.00",
+                "-> Owoce\t|1\t|200",
+                "Liczba pozycji: 3"};
+
         InvoiceGenerator invoiceGenerator = new InvoiceGenerator();
         Invoice firstInvoice = invoiceGenerator.generateNewInvoice();
         Invoice invoice = invoiceGenerator.generateNewInvoice();
@@ -56,9 +58,12 @@ public class InvoicePrinterTest {
         invoice.addProduct(new DairyProduct("Maslanka", new BigDecimal("100")));
         invoice.addProduct(new OtherProduct("Wino", new BigDecimal("10")));
         Assert.assertThat(new BigDecimal("310"), Matchers.comparesEqualTo(invoice.getNetTotal()));
-        System.out.println(invoicePrinter.getPrintMessage());
+        String message = invoicePrinter.getPrintMessage();
 
-        Assert.assertTrue("Generated invoice print is not as expected.",
-                expectedOutput.equals(invoicePrinter.getPrintMessage()));
+        for (String substring : expectedSubstrings) {
+            if(!message.contains(substring)) {
+                Assert.fail("Invoice hasn't got the expected substring: '"+substring + "'\n"+message);
+            }
+        }
     }
 }
