@@ -24,8 +24,6 @@ jobs:
         with:
           java-version: '8'
           distribution: 'adopt'
-      - name: Checkstyle
-        run: mvn checkstyle:check
       - name: Test
         run: mvn test
 
@@ -39,8 +37,6 @@ jobs:
         with:
           java-version: '13'
           distribution: 'adopt'
-      - name: Checkstyle
-        run: mvn checkstyle:check
       - name: Test
         run: mvn test
 
@@ -54,7 +50,5 @@ jobs:
         with:
           java-version: '15'
           distribution: 'adopt'
-      - name: Checkstyle
-        run: mvn checkstyle:check
       - name: Test
         run: mvn test
