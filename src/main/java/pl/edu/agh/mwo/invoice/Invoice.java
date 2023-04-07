@@ -23,10 +23,10 @@ public class Invoice {
         if (product == null || quantity <= 0) {
             throw new IllegalArgumentException();
         }
-        for(Product existingProduct : products.keySet()) {
-            if(existingProduct.getName().equals(product.getName())
-            && existingProduct.getPrice().equals(product.getPrice())
-            && existingProduct.getTaxPercent().equals(product.getTaxPercent())) {
+        for (Product existingProduct : products.keySet()) {
+            if (existingProduct.getName().equals(product.getName())
+                    && existingProduct.getPrice().equals(product.getPrice())
+                    && existingProduct.getTaxPercent().equals(product.getTaxPercent())) {
                 Integer numberOfExistingProduct = products.get(existingProduct);
                 numberOfExistingProduct += quantity;
                 products.put(existingProduct, numberOfExistingProduct);
