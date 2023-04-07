@@ -51,4 +51,8 @@ public class Invoice {
     public int getId() {
         return this.id;
     }
+
+    public Map<Product, Integer> getProducts() {
+        return this.products;
+    }
 }
