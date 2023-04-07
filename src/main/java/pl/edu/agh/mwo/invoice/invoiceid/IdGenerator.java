@@ -8,7 +8,7 @@ public class IdGenerator {
     }
 
     public IdGenerator(int initialNumber) throws WrongInitialNumber {
-        if(initialNumber < 0) {
+        if (initialNumber < 0) {
             throw new WrongInitialNumber();
         }
         this.numberOfGeneratedInvoice = initialNumber;
