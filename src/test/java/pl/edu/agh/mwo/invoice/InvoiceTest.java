@@ -18,7 +18,7 @@ public class InvoiceTest {
 
     @Before
     public void createEmptyInvoiceForTheTest() {
-        invoice = new Invoice();
+        invoice = new Invoice(1);
     }
 
     @Test
